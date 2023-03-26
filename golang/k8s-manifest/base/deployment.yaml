@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-go
+  labels:
+    app: app-go
+spec:
+  selector:
+    matchLabels:
+      app: app-go
+  template:
+    metadata:
+      labels:
+        app: app-go
+    spec:
+      containers:
+        - name: app-go
+          image: 493981950259.dkr.ecr.eu-north-1.amazonaws.com/ecr-go:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
