@@ -9,6 +9,24 @@ module "eks" {
   subnet_ids      = module.vpc.private_subnets
   vpc_id          = module.vpc.vpc_id
 
+  cluster_endpoint_private_access = var.eks_public_access
+  cluster_endpoint_public_access  = var.eks_private_access
+
+  cluster_addons = {
+    coredns = {
+      resolve_conflicts = "OVERWRITE"
+    }
+    kube-proxy = {}
+    vpc-cni = {
+      resolve_conflicts = "OVERWRITE"
+    }
+
+  }
+  eks_managed_node_group_defaults = {
+
+    attach_cluster_primary_security_group = true
+  }
+
   eks_managed_node_groups = {
     Nodes = {
       desired_capacity = 1
@@ -27,6 +45,8 @@ module "eks" {
       source_cluster_security_group = true
       description                   = "Allow access from control plane to webhook port of AWS load balancer controller"
     }
+
+
   }
 
 }

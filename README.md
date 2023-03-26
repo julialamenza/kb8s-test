@@ -57,3 +57,21 @@ and then re-run
 terraform destroy
 
 ```
+
+TODO
+
+TODO
+
+Solve issue with ALB
+
+```
+"...","error":"expect exactly one securityGroup tagged with kubernetes.io/cluster/... for eni eni-0d46id..., got:
+```
+
+Add
+
+```
+kubernetes.io/cluster/
+```
+
+Tag on security groups that are missing, check how to do it by TF
