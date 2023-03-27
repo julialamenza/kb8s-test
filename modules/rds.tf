@@ -68,3 +68,49 @@ module "db" {
   ]
 
 }
+
+#RDS ACCESS MANAGEMENT
+
+module "rds_rw_group" {
+  source                            = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
+  name                              = "rds-rw"
+  attach_iam_self_management_policy = false
+  create_group                      = true
+  group_users                       = ["teste"]
+  custom_group_policy_arns          = [module.allow_rw_db_access_iam_policy.arn]
+}
+
+module "allow_rw_db_access_iam_policy" {
+  source        = "terraform-aws-modules/iam/aws//modules/iam-policy"
+  description   = "Allow rw acess on rds "
+  name          = "allow-rw-db-access"
+  create_policy = true
+
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Sid" : "VisualEditor0",
+        "Effect" : "Allow",
+        "Action" : [
+          "rds:CreateDBClusterEndpoint",
+          "rds:StartDBCluster",
+          "rds:StopDBCluster",
+          "rds:CopyDBClusterSnapshot",
+          "rds:StopDBInstance",
+          "rds:StartDBInstance",
+          "rds:RebootDBCluster",
+          "rds:RebootDBInstance",
+          "rds:CreateDBCluster",
+          "rds:DescribeDBClusterSnapshots",
+          "rds:DescribeDBInstances",
+          "rds:DescribeDBClusterEndpoints",
+          "rds:DescribeDBClusters",
+          "rds:CreateCustomDBEngineVersion",
+          "rds:DeleteDBInstance"
+        ],
+        "Resource" : "*"
+      }
+    ]
+  })
+}

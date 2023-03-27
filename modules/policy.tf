@@ -52,3 +52,4 @@ module "allow_assume_eks_admins_iam_policy" {
     ]
   })
 }
+
