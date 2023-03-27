@@ -4,6 +4,13 @@ module "dev_cluster" {
   instance_type      = "t3.medium"
   eks_public_access  = true
   eks_private_access = true
+  db_id              = "docplanner"
+  db_name            = "docplanner"
+  db_user            = "docplanner"
+  rds_instance_type  = "db.t3.small"
+  allocated_storage  = 5
+  maintenance_window = "Sat:00:00-Sat:03:00"
+  backup_window      = "00:00-06:00"
 }
 
 

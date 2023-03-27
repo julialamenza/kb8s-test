@@ -19,8 +19,6 @@ spec:
         - name: devops-php
           image: 493981950259.dkr.ecr.eu-north-1.amazonaws.com/ecr-php:latest
           imagePullPolicy: Always
-          command: ["/bin/sh"]
-          args: ["/entrypoint.sh"]
           ports:
             - containerPort: 80
           resources:
