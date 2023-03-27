@@ -1,7 +1,9 @@
 module "dev_cluster" {
-  source        = "./modules"
-  cluster_name  = "eu-north-1-dev"
-  instance_type = "t3.medium"
+  source             = "./modules"
+  cluster_name       = "eu-north-1-dev"
+  instance_type      = "t3.medium"
+  eks_public_access  = true
+  eks_private_access = true
 }
 
 

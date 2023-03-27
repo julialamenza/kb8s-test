@@ -1,22 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-go
+  name: devops-php
   labels:
-    app: app-go
+    app: devops-php
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: app-go
+      app: devops-php
   template:
     metadata:
       labels:
-        app: app-go
+        app: devops-php
     spec:
+      serviceAccountName: devops-php
       containers:
-        - name: app-go
-          image: 493981950259.dkr.ecr.eu-north-1.amazonaws.com/ecr-go:latest
+        - name: devops-php
+          image: 493981950259.dkr.ecr.eu-north-1.amazonaws.com/ecr-php:latest
           imagePullPolicy: Always
+          command: ["/bin/sh"]
+          args: ["/entrypoint.sh"]
           ports:
             - containerPort: 80
           resources:
@@ -26,3 +30,4 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "500m"
+

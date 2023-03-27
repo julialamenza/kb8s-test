@@ -60,8 +60,6 @@ terraform destroy
 
 TODO
 
-TODO
-
 Solve issue with ALB
 
 ```
@@ -74,4 +72,5 @@ Add
 kubernetes.io/cluster/
 ```
 
-Tag on security groups that are missing, check how to do it by TF
+Tag on security groups that are missing (SG description - EKS node shared security group
+) check how to do it by TF
